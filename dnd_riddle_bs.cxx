@@ -52,13 +52,17 @@ bool vowel_condition(const std::string& str) {
 }
 
 bool prime_condition(const std::string& str) {
-    static const std::array<size_t, 22> primes { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79 };
-    for (size_t prime_0 : primes) {
-        for (size_t prime_1 : primes) {
-            size_t len = str.length();
-            if (len == prime_0 + 1 && len == prime_1 * 2) {
-                return true;
+    // maximum word length in list is 31
+    static const std::array<size_t, 11> primes { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31};
+    const size_t len = str.length();
+    for (size_t prime : primes) {
+        if (len == prime + 1) {
+            for (size_t prime : primes) {
+                if (len == prime * 2) {
+                    return true;
+                }
             }
+            return false;
         }
     }
     return false;
